@@ -5,6 +5,7 @@ const express = require("express");
 const logger = require("morgan");
 const db = require("./db/connection");
 const Fruit = require("./models/fruit.js");
+const methodOverride = require("method-override");
 
 db.on("connected", () => {
   console.log(`Connected to MongoDB ${db.name}`);
@@ -20,6 +21,7 @@ const app = express();
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(logger("dev"));
+app.use(methodOverride("_method"));
 
 // Routes
 
@@ -57,7 +59,7 @@ app.get("/fruits/:id", async (req, res) => {
   });
 });
 
-// app.delete("/fruits/:id", async (req, res) => {
-//   await Fruit.findByIdAndDelete(req.params.id);
-//   res.redirect("/fruits");
-// });
+app.delete("/fruits/:id", async (req, res) => {
+  await Fruit.findByIdAndDelete(req.params.id);
+  res.redirect("/fruits");
+});
