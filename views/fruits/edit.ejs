@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a New Fruit!</title>
+  </head>
+  <body>
+    <%- include('../partials/nav.ejs') %>
+
+    <h1>Edit <%= fruit.name %></h1>
+    <form action="/fruits/<%=fruit.id%>?_method=PUT" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" value="<%= fruit.name %>" />
+      <label for="isReadyToEat">Ready To Eat?</label>
+      <input
+        type="checkbox"
+        name="isReadyToEat"
+        id="isReadyToEat"
+        <% if(fruit.isReadyToEat){ %>
+            checked
+        <%}%>
+      />
+
+      <button type="submit">Update Fruit <%= fruit.name %></button>
+    </form>
+  </body>
+</html>

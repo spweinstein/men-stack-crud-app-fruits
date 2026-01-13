@@ -44,7 +44,7 @@ app.post("/fruits", async (req, res) => {
 app.get("/fruits", async (req, res) => {
   // Find all fruits data from fruits collection in the DB
   const allFruits = await Fruit.find();
-  console.log(allFruits);
+  // console.log(allFruits);
   // Render HTML file with the data embedded
   res.render("fruits/index.ejs", {
     fruits: allFruits,
@@ -62,4 +62,23 @@ app.get("/fruits/:id", async (req, res) => {
 app.delete("/fruits/:id", async (req, res) => {
   await Fruit.findByIdAndDelete(req.params.id);
   res.redirect("/fruits");
+});
+
+app.get("/fruits/:id/edit", async (req, res) => {
+  const fruit = await Fruit.findById(req.params.id);
+  res.render("fruits/edit.ejs", {
+    fruit,
+  });
+});
+
+app.put("/fruits/:id", async (req, res) => {
+  console.log(req.body);
+  if (req.body.isReadyToEat === "on") {
+    req.body.isReadyToEat = true;
+  } else {
+    req.body.isReadyToEat = false;
+  }
+  const fruit = await Fruit.findByIdAndUpdate(req.params.id, req.body);
+  console.log("Updated fruit to ", fruit);
+  res.redirect(`/fruits/${req.params.id}`);
 });
