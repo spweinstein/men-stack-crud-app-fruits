@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All Fruits</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
   </head>
   <body>
     <%- include('../partials/nav.ejs') %>
     <h1>All Fruits</h1>
+
     <ul>
       <% fruits.forEach(fruit => { %>
       <li><a href="/fruits/<%= fruit._id %>"> <%= fruit.name %></a></li>

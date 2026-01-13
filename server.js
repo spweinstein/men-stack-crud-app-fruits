@@ -6,6 +6,7 @@ const logger = require("morgan");
 const db = require("./db/connection");
 const Fruit = require("./models/fruit.js");
 const methodOverride = require("method-override");
+const path = require("path");
 
 db.on("connected", () => {
   console.log(`Connected to MongoDB ${db.name}`);
@@ -22,6 +23,8 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(logger("dev"));
 app.use(methodOverride("_method"));
+// console.log(__dirname);
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 
