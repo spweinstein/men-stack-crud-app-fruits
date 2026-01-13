@@ -36,14 +36,16 @@ app.post("/fruits", async (req, res) => {
   req.body.isReadyToEat = req.body.isReadyToEat === "on" ? true : false;
   await Fruit.create(req.body);
   //   res.send("You submitted a form");
-  res.redirect("/fruits/new");
+  res.redirect("/fruits");
 });
 
-// app.get("/fruits", async (req, res) => {
-//   const allFruits = await Fruit.find();
-//   console.log(allFruits);
-//   res.render("fruits/index.ejs", {
-//     fruits: allFruits,
-//   });
-//   // res.send("Welcome to the index page - todo!");
-// });
+app.get("/fruits", async (req, res) => {
+  // Find all fruits data from fruits collection in the DB
+  const allFruits = await Fruit.find();
+  console.log(allFruits);
+  // Render HTML file with the data embedded
+  res.render("fruits/index.ejs", {
+    fruits: allFruits,
+  });
+  // res.send("Welcome to the index page - todo!");
+});
