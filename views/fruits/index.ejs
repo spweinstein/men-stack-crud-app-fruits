@@ -6,11 +6,11 @@
     <title>All Fruits</title>
   </head>
   <body>
+    <%- include('../partials/nav.ejs') %>
     <h1>All Fruits</h1>
-    <a href="/fruits/new">Add New Fruit</a>
     <ul>
       <% fruits.forEach(fruit => { %>
-      <li><%= fruit.name %></li>
+      <li><a href="/fruits/<%= fruit._id %>"> <%= fruit.name %></a></li>
       <% }) %>
     </ul>
   </body>

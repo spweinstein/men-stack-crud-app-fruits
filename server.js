@@ -49,3 +49,15 @@ app.get("/fruits", async (req, res) => {
   });
   // res.send("Welcome to the index page - todo!");
 });
+
+app.get("/fruits/:id", async (req, res) => {
+  const fruit = await Fruit.findById(req.params.id);
+  res.render("fruits/show.ejs", {
+    fruit,
+  });
+});
+
+// app.delete("/fruits/:id", async (req, res) => {
+//   await Fruit.findByIdAndDelete(req.params.id);
+//   res.redirect("/fruits");
+// });
